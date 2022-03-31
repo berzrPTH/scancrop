@@ -2,9 +2,10 @@ import os
 import cv2 as cv
 import numpy as np
 from utils import *
+from plot import *
 
 
-def get_roi(contours):
+def get_roi(contours, img=None):
     """Get region of interests.
 
     Args:
@@ -19,7 +20,7 @@ def get_roi(contours):
         x, y, w, h = cv.boundingRect(contour)
         boxes.append([[x, y], [x + w, y + h]])
 
-    roi, max_area = merge_boxes(boxes)
+    roi, max_area = merge_boxes(boxes, img)
     return roi, max_area
 
 
@@ -62,10 +63,10 @@ def find_scans(img):
     ret, thresh = cv.threshold(gray, 200, 255, cv.THRESH_BINARY_INV)
     contours, hierarchy = cv.findContours(
         thresh, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-    roi, max_area = get_roi(contours)
+    roi, max_area = get_roi(contours, blur)
 
     # plot region of interest
-    # plot_roi(blur, roi)
+    plot_roi(img, roi)
 
     # area of each scans should be at least some ratio to the max area
     scans = crop_scans(img, roi, max_area * 0.4)
@@ -87,7 +88,7 @@ def process_file(src_dir, fname, out_dir='./crop'):
 
 
 if __name__ == "__main__":
-    src_dir = './scan'
-    fname = 'Image00031.jpg'
+    src_dir = ''
+    fname = 'sample.jpg'
     out_dir = ''
     process_file(src_dir, fname, out_dir)
