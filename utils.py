@@ -54,12 +54,11 @@ def find_overlaps(boxes, idx):
     return overlaps
 
 
-def merge_boxes(boxes, img=None):
+def merge_boxes(boxes):
     """Merge overlapping boxes.
 
     Args:
         boxes: List of boxes.
-        img: Image for plot if needed.
 
     Returns:
         boxes: List of boxes after merge.

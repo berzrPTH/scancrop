@@ -14,7 +14,6 @@ def plot_roi(img, roi):
         copy = plot_box(copy, box)
     cv.imshow('ROI', copy)
     cv.imwrite('ROI.jpg', copy)
-    cv.waitKey(0)
 
 
 def plot_box(img, box, color=(0, 255, 0)):
