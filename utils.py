@@ -67,8 +67,10 @@ def merge_boxes(boxes, img=None):
     """
     max_area = 0
     finished = False
+
     # merge box from large to small, which accelerate the process
     boxes.sort(key=lambda box: rect_area(box))
+
     # find all possible pairs and find if there are overlapping
     while not finished:
         finished = True
@@ -77,11 +79,13 @@ def merge_boxes(boxes, img=None):
         while idx >= 0:
             max_area = max(max_area, rect_area(boxes[idx]))
             overlap_idx = find_overlaps(boxes, idx)
+
             # if there are overlapping boxes, form a new box include them
             if overlap_idx:
                 overlap_idx.add(idx)
                 overlap_boxes = [boxes[i] for i in overlap_idx]
                 overlap_boxes = np.array(overlap_boxes).reshape((-1, 2))
+
                 # the new box should be minimum
                 top, left = np.min(overlap_boxes, axis=0)
                 bot, right = np.max(overlap_boxes, axis=0)

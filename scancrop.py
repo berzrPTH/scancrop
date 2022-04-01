@@ -88,7 +88,7 @@ def process_file(src_dir, fname, out_dir='./crop'):
 
 
 if __name__ == "__main__":
-    src_dir = ''
-    fname = 'sample.jpg'
-    out_dir = ''
+    src_dir = './'
+    fname = './sample.jpg'
+    out_dir = './crop'
     process_file(src_dir, fname, out_dir)
