@@ -8,7 +8,7 @@ The scanned image should be with a light background and the angle of the photo i
 
 The script will automatically find possible photo areas in the image, merge overlapping parts, and discard areas that are too small.
 
-![Region of Interest](./merge.gif)
+<img src="./doc/images/merge.gif">
 
 ## Requirements
 
