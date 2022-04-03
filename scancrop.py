@@ -1,4 +1,5 @@
 import os
+import os.path as osp
 import cv2 as cv
 import numpy as np
 import argparse
@@ -115,10 +116,11 @@ def process_file(src_dir, fname, out_dir='./crop'):
         fname: Image name.
         out_dir: Output directory of crop image.
     """
-    img = cv.imread(os.path.join(src_dir, fname))
+    img = cv.imread(osp.join(src_dir, fname))
     scans = find_scans(img)
     for i, scan in enumerate(scans):
-        cv.imwrite(os.path.join(out_dir, f'{fname[:-4]}_{i+1}.jpg'), scan)
+        cv.imwrite(osp.join(
+            out_dir, f'{osp.splitext(fname)[0]}_{i+1}.jpg'), scan)
 
 
 if __name__ == "__main__":
